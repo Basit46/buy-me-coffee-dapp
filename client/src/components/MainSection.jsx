@@ -32,6 +32,11 @@ const MainSection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (parseFloat(amount) == 0) {
+      alert("Amount must be more than 0 boss!");
+      return;
+    }
+
     const writeProvider = new ethers.providers.Web3Provider(window.ethereum);
     await writeProvider.send("eth_requestAccounts", []);
     const signer = writeProvider.getSigner();
@@ -45,11 +50,11 @@ const MainSection = () => {
     const buycoffee = await writeContract.buy(name, {
       value: ethers.utils.parseEther(amount),
     });
+
     alert("Transaction Processing, Pls wait!");
     setName("");
     setAmount("");
     await buycoffee.wait();
-
     alert("Coffee Bought!!");
     window.location.reload();
   };
@@ -68,13 +73,15 @@ const MainSection = () => {
           className="w-[90%] vsm:w-[300px] border-[2px] border-gray-400 p-[5px]"
           type="text"
           placeholder="Your name"
+          required
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <input
           className="w-[90%] vsm:w-[300px] border-[2px] border-gray-400 p-[5px]"
-          type="text"
+          type="number"
           placeholder="Enter ether amount"
+          required
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
