@@ -3,7 +3,7 @@ import Sender from "./Sender";
 
 const Senders = ({ senders }) => {
   return (
-    <table className="w-[95%] md:w-[80%] mt-[30px] bg-blue-200">
+    <table className="w-[98%] md:w-[80%] mt-[30px] bg-blue-200">
       <thead>
         <tr className="font-bold underline">
           <td>No</td>
